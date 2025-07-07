@@ -1,0 +1,8 @@
+# Rasa SDK (required to test custom actions)
+rasa-sdk==3.6.2
+
+# Pytest (test runner)
+pytest
+
+# Optional: rich test output
+pytest-dotenv

@@ -1,0 +1,38 @@
+version: "3.1"
+
+stories:
+
+- story: refund request flow
+  steps:
+    - user: |
+        I want a refund
+      intent: ask_refund_policy
+    - action: utter_ask_refund_policy
+
+- story: return process flow
+  steps:
+    - user: |
+        How do I return an item?
+      intent: ask_return_process
+    - action: action_send_return_link
+
+- story: payment query
+  steps:
+    - user: |
+        Do you accept PayPal?
+      intent: ask_payment_methods
+    - action: utter_ask_payment_methods
+
+- story: technical issue flow
+  steps:
+    - user: |
+        The site is broken
+      intent: ask_technical_support
+    - action: utter_ask_technical_support
+
+- story: fallback activated
+  steps:
+    - user: |
+        What is love?
+      intent: out_of_scope
+    - action: utter_out_of_scope

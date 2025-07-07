@@ -1,0 +1,64 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - ask_refund_policy
+  - ask_shipping_info
+  - ask_return_process
+  - ask_payment_methods
+  - ask_account_help
+  - ask_order_status
+  - ask_technical_support
+  - out_of_scope
+  
+entities:
+  - order_number
+
+slots:
+  order_number:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: order_number
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+
+  utter_goodbye:
+    - text: "Thank you for contacting support. Have a great day!"
+
+  utter_ask_refund_policy:
+    - text: "Refunds are available within 30 days if the item is unused. Would you like to begin a refund?"
+
+  utter_ask_shipping_info:
+    - text: "Standard shipping takes 3 or 5 business days. Express options are available at checkout."
+
+  utter_ask_payment_methods:
+    - text: "We accept Visa, MasterCard, AmEx, and PayPal."
+
+  utter_ask_account_help:
+    - text: "To reset your password, use the Forgot Password link on the login screen. Do you need help receiving the reset email?"
+
+  utter_ask_order_status:
+    - text: "Please provide your order number so I can check the status."
+
+  utter_ask_technical_support:
+    - text: "I'm sorry you're experiencing an issue. Could you describe the problem?"
+
+  utter_out_of_scope:
+    - text: "I'm not trained on that topic. Please contact customer care for assistance."
+
+  utter_default:
+    - text: "I did not quite catch that. Please reach out to customer care for more help."
+
+actions:
+  - action_check_order_status
+  - action_send_return_link
+  - action_default_fallback
+
+session_config:
+  session_expiration_time: 30
+  carry_over_slots_to_new_session: true

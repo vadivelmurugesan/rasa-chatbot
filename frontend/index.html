@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ Chatbot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f8fa;
+    }
+
+    #chat-container {
+      width: 100%;
+      max-width: 400px;
+      height: 550px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      z-index: 9999;
+    }
+
+    #chat-header {
+      background-color: #0b5ed7;
+      color: white;
+      padding: 12px 16px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    #chat-messages {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #fafafa;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      word-wrap: break-word;
+      line-height: 1.4;
+    }
+
+    .bot {
+      background: #e9ecef;
+      align-self: flex-start;
+    }
+
+    .user {
+      background: #0d6efd;
+      color: white;
+      align-self: flex-end;
+    }
+
+    #chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+      padding: 8px;
+      background: #fff;
+    }
+
+    #chat-input input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    #chat-input button {
+      margin-left: 8px;
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    #chat-input button:hover {
+      background-color: #0a58ca;
+    }
+
+    @media screen and (max-width: 480px) {
+      #chat-container {
+        right: 10px;
+        left: 10px;
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="chat-container" role="region" aria-label="FAQ Chatbot">
+    <div id="chat-header">💬 FAQ Chatbot</div>
+    <div id="chat-messages" aria-live="polite"></div>
+    <div id="chat-input">
+      <input id="user-input" type="text" placeholder="Type your question..." aria-label="Type your question" />
+      <button onclick="sendMessage()" aria-label="Send message">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const rasaEndpoint = "http://localhost:5005/webhooks/rest/webhook";
+    const chatMessages = document.getElementById("chat-messages");
+    const userInput = document.getElementById("user-input");
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = `message ${sender}`;
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      appendMessage(message, "user");
+      userInput.value = "";
+
+      try {
+        const response = await fetch(rasaEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sender: "user", message })
+        });
+
+        const data = await response.json();
+        if (data.length === 0) {
+          appendMessage("Unable to connect bot server... Try again!!", "bot");
+        } else {
+          data.forEach(item => {
+            if (item.text) appendMessage(item.text, "bot");
+          });
+        }
+      } catch (err) {
+        console.error("Bot error:", err);
+        appendMessage("Oops, something went wrong. Please try again later.", "bot");
+      }
+    }
+
+    // Optional: send greeting
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        appendMessage("Hi! Ask me anything about our services.", "bot");
+      }, 500);
+    });
+
+    // Enter key triggers send
+    userInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") sendMessage();
+    });
+  </script>
+</body>
+</html>
