@@ -1,0 +1,77 @@
+# Ignore Python cache, build, and test files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# Ignore Poetry and pip virtual environments
+.venv/
+.env
+.env.*
+*.env
+poetry.lock.bak
+pip-log.txt
+
+# Ignore test/coverage artifacts
+.coverage
+htmlcov/
+.tox/
+.cache/
+nosetests.xml
+coverage.xml
+pytest_cache/
+test-results/
+tests/
+logs/
+*.log
+
+# Ignore Rasa runtime data and models (built in the container or mounted externally)
+models/
+rasa.db
+rasa.db-journal
+rasa_core.log
+results/
+*.json.gz
+
+# Ignore OS and editor files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# Ignore Docker Compose/dev config
+docker-compose.override.yml
+
+# Ignore Git and VCS data
+.git/
+.gitignore
+.gitattributes
+
+# Ignore CI/CD secrets/config
+.github/
+.github/secrets
+.github/.env
+
+# Ignore Node artifacts (if you build frontend widget)
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Ignore build/output/temp files
+build/
+dist/
+tmp/
+temp/
+*.bak
+*.tmp
+
+# (Allow these to be included:)
+!.env.example

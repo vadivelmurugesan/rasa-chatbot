@@ -1,0 +1,97 @@
+# -------------------
+# Python
+# -------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# -------------------
+# Poetry & Pip
+# -------------------
+# (poetry manages .venv in project root, pip may use dist-info)
+.venv/
+.env
+.env.*
+*.env
+poetry.lock.bak
+pip-log.txt
+
+# -------------------
+# Rasa
+# -------------------
+models/
+rasa.db
+rasa.db-journal
+rasa_core.log
+results/
+*.json.gz
+
+# -------------------
+# Secrets & Credentials
+# -------------------
+# (Never commit real secrets)
+.env
+.env.*
+!*.env.example
+secrets/
+*.key
+*.pem
+*.crt
+
+# -------------------
+# Test / Coverage
+# -------------------
+.coverage
+htmlcov/
+.tox/
+.cache/
+nosetests.xml
+coverage.xml
+pytest_cache/
+test-results/
+tests/__pycache__/
+tests/*.log
+
+# -------------------
+# OS/Editor Files
+# -------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# -------------------
+# Docker
+# -------------------
+*.pid
+*.pid.lock
+docker-compose.override.yml
+
+# -------------------
+# CI/CD
+# -------------------
+/.github/workflows/*.secrets
+/.github/secrets
+/.github/.env
+
+# -------------------
+# Other
+# -------------------
+logs/
+*.log
+build/
+dist/
+tmp/
+temp/
+*.bak
+*.tmp
