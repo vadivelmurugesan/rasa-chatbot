@@ -1,0 +1,20 @@
+version: "3.1"
+intents:
+  - reset_password
+  - get_invoice
+  - escalate
+  - nlu_fallback
+
+responses:
+  utter_reset_password:
+    - text: |
+        To reset your password, click "Forgot Password" on the login page and follow the instructions sent to your email.
+  utter_get_invoice:
+    - text: |
+        You can download your invoice from the "Billing" section of your account dashboard.
+  utter_escalate:
+    - text: |
+        I'm connecting you with a support specialist now. Please hold on!
+  utter_default:
+    - text: |
+        I'm sorry, I didn't understand that. Could you please rephrase your question or ask for help?

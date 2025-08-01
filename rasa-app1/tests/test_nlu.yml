@@ -1,0 +1,16 @@
+version: "3.1"
+nlu:
+- intent: reset_password
+  examples: |
+    - I forgot my password
+    - Help me reset my password
+
+- intent: get_invoice
+  examples: |
+    - Show me my latest invoice
+    - I want to download my bill
+
+- intent: escalate
+  examples: |
+    - I need to speak to support
+    - This answer didn't help

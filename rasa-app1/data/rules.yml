@@ -1,0 +1,21 @@
+version: "3.1"
+rules:
+  - rule: Provide password reset instructions
+    steps:
+      - intent: reset_password
+      - action: utter_reset_password
+
+  - rule: Provide invoice information
+    steps:
+      - intent: get_invoice
+      - action: utter_get_invoice
+
+  - rule: Handle explicit escalation
+    steps:
+      - intent: escalate
+      - action: utter_escalate
+
+  - rule: Handle fallback (no matching intent)
+    steps:
+      - intent: nlu_fallback
+      - action: utter_default

@@ -1,0 +1,42 @@
+version: "3.1"
+nlu:
+
+- intent: reset_password
+  examples: |
+    - reset my password
+    - how do I reset my password?
+    - forgot password
+    - I can't log in, need to reset password
+    - update password
+    - change my password
+    - recover password
+    - password recovery
+    - lost password
+
+- intent: get_invoice
+  examples: |
+    - get my invoice
+    - can I download my bill?
+    - show me my invoice
+    - where is my invoice?
+    - send me my invoice
+    - how do I view my invoices?
+    - last month's bill
+
+- intent: escalate
+  examples: |
+    - I want to talk to a human
+    - escalate to agent
+    - I need more help
+    - connect me with support
+    - this did not solve my problem
+    - not helpful
+    - talk to a real person
+
+- intent: nlu_fallback
+  examples: |
+    - qwertyuiop
+    - asdfghjkl
+    - lkjhgfdsa
+    - random phrase
+    - 1234567890

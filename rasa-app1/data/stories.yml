@@ -1,0 +1,18 @@
+version: "3.1"
+stories:
+  - story: User resets password successfully
+    steps:
+      - intent: reset_password
+      - action: utter_reset_password
+
+  - story: User asks for invoice
+    steps:
+      - intent: get_invoice
+      - action: utter_get_invoice
+
+  - story: Escalate after unsatisfied
+    steps:
+      - intent: nlu_fallback
+      - action: utter_default
+      - intent: escalate
+      - action: utter_escalate
